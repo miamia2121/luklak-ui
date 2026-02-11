@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Luklak Scenario Builder Design System */
+
+@layer base {
+  :root {
+    /* Core Dashboard Colors (Stripe-like) */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;
+
+    /* Luklak Brand Colors */
+    --luklak-navy: 227 45% 33%;
+    --luklak-navy-light: 227 35% 45%;
+    --luklak-blue: 217 91% 60%;
+    --luklak-teal: 168 76% 42%;
+    --luklak-teal-light: 168 71% 48%;
+    --luklak-orange: 25 95% 53%;
+    --luklak-green: 142 71% 45%;
+    --luklak-purple: 262 83% 58%;
+    --luklak-red: 0 72% 51%;
+
+    /* Terminal/Briefing Room Colors */
+    --terminal-bg: 222 47% 6%;
+    --terminal-surface: 222 40% 10%;
+    --terminal-border: 220 30% 18%;
+    --terminal-text: 210 40% 96%;
+    --terminal-muted: 215 20% 55%;
+    --terminal-accent: 168 76% 42%;
+    --terminal-glow: 168 100% 45%;
+
+    /* Sidebar System */
+    --sidebar-background: 227 45% 33%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 227 35% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 227 30% 40%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Terminal Styling */
+  .terminal-container {
+    @apply bg-[hsl(var(--terminal-bg))] text-[hsl(var(--terminal-text))];
+  }
+
+  .terminal-surface {
+    @apply bg-[hsl(var(--terminal-surface))] border-[hsl(var(--terminal-border))];
+  }
+
+  .terminal-input {
+    @apply bg-[hsl(var(--terminal-surface))] border-[hsl(var(--terminal-border))] 
+           text-[hsl(var(--terminal-text))] placeholder:text-[hsl(var(--terminal-muted))]
+           focus:border-[hsl(var(--terminal-accent))] focus:ring-1 focus:ring-[hsl(var(--terminal-accent))];
+  }
+
+  .terminal-glow {
+    text-shadow: 0 0 10px hsl(var(--terminal-glow) / 0.5);
+  }
+
+  /* Luklak Dashboard Components */
+  .luklak-sidebar {
+    @apply bg-[hsl(var(--luklak-navy))];
+  }
+
+  .luklak-sidebar-item {
+    @apply bg-[hsl(var(--luklak-navy-light))] hover:bg-[hsl(var(--luklak-navy-light)/0.8)];
+  }
+
+  .status-active {
+    @apply text-[hsl(var(--luklak-green))];
+  }
+
+  .status-pending {
+    @apply text-[hsl(var(--luklak-orange))];
+  }
+
+  .status-closed {
+    @apply text-[hsl(var(--luklak-red))];
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--terminal-accent) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--terminal-accent) / 0.5); }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+
+  .animate-typing {
+    animation: typing 2s steps(30, end);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
